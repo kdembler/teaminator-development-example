@@ -1,12 +1,23 @@
 <template>
   <b-list-group class="skill-list">
     <b-list-group-item>{{ header }}</b-list-group-item>
-    <template v-for="(skill, index) in skills">
-      <b-list-group-item v-b-toggle="`skill${index}-accordion`" :key="`skill${index}-header`">
+    <template v-for="skill in skills">
+      <b-list-group-item
+        v-bind:class="{'bg-dark': opened[skill.id], 'text-white': opened[skill.id]}"
+        v-b-toggle="`${skill.id}-accordion`"
+        :key="`${skill.id}-header`"
+      >
         {{ skill.name }}
       </b-list-group-item>
-      <b-collapse :id="`skill${index}-accordion`" :accordion="`${header}-accordion`" role="tabpanel" :key="`skill${index}-content`">
-        <b-list-group-item v-for="(value, user) in skill.users" :key="`skill${index}-${user}`">
+      <b-collapse
+        v-model="opened[skill.id]"
+        :id="`${skill.id}-accordion`"
+        :accordion="`${header}-accordion`"
+        class="users-list"
+        role="tabpanel"
+        :key="`${skill.id}-users`"
+      >
+        <b-list-group-item v-for="(value, user) in skill.users" :key="`${skill.id}-${user}`">
           {{ team[user].name }}
         </b-list-group-item>
       </b-collapse>
@@ -31,40 +42,70 @@ export default {
       type: Object,
       required: true
     }
+  },
+  data() {
+    return {
+      opened: {}
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+$divider-color: #e9eff2;
+
+%divider {
+  position: absolute;
+  content: "";
+  left: 3%;
+  bottom: 0;
+  height: 1px;
+  width: 94%;
+  border-bottom: 1px solid $divider-color;
+}
+
 .list-group-item {
   border: none;
   margin: 0;
-}
-
-.skill-list > .list-group-item {
-  &:not(:first-child) {
-    cursor: pointer;
-  }
+  background-color: #fafcfc;
 
   &:first-child {
     border-radius: 0;
-    padding: 0.75rem 1.0rem;
-    font-size: 1.10rem;
-    border-bottom: 1px solid lightgray;
   }
 
   &:last-child {
     border-radius: 0;
   }
+}
 
-  &:not(:first-child):not(:nth-last-child(2))::after {
-    position: absolute;
-    content: "";
-    left: 3%;
-    bottom: 0;
-    height: 1px;
-    width: 94%;
-    border-bottom: 1px solid lightgray;
+.skill-list > .list-group-item {
+  transition: all 0.25s linear;
+
+  &:not(:first-child) {
+    cursor: pointer;
+  }
+
+  &:first-child {
+    padding: 0.75rem 1.0rem;
+    font-size: 1.10rem;
+    border-bottom: 1px solid $divider-color;
+  }
+
+  &:not(:first-child):not(:nth-last-child(2)):not(.bg-dark)::after {
+    @extend %divider;
+  }
+}
+
+.users-list > .list-group-item {
+  background-color: white;
+  padding: 0.75rem 1.6rem;
+
+  &:not(:last-child)::after {
+    @extend %divider;
+  }
+
+  &:last-child {
+    border-bottom: 1px solid $divider-color;
   }
 }
 </style>
