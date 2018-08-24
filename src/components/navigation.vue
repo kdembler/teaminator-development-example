@@ -7,6 +7,8 @@
         <span class="ml-2 d-sm-none d-xs-inline-block">{{ 'Teaminator' }}</span>
       </b-navbar-brand>
 
+      <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
+
       <b-collapse is-nav id="nav_collapse" v-model="showCollapse">
         <b-navbar-nav v-if="profile.userId" class="text-30">
           <b-nav-item :to="{ name: 'Home' }" active-class="navlink-active" class="text-right" exact><span>Home</span></b-nav-item>
