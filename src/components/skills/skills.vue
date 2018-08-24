@@ -7,11 +7,11 @@
     </b-row>
     <b-row align-h="between">
       <small>Discover and improve your team strongest skills</small>
-      <small>Updated on <b class="text-dark">Jul 29, 2018</b></small>
+      <small>Updated on <b class="text-dark">{{ formattedDate }}</b></small>
     </b-row>
     <b-row class="mt-3">
       <b-col class="p-0 pr-2" cols="6">
-        <skills-list header="By Skill" :skills="skills"/>
+        <skills-list header="By Skill" :skills="skills" :team="team"/>
       </b-col>
     </b-row>
   </div>
@@ -22,6 +22,40 @@
 // Color circle to present progress
 import ColoredProgressCircle from '../progress/coloredProgressCircle';
 import SkillsList from './skills-list';
+
+function parseSkills(skills, team) {
+  const dateUpdated = new Date(skills.lastUpdated);
+
+  const parsedSkills = Object.keys(skills.team).map(skill => {
+    const skillUsers = {};
+    Object.keys(skills.users).map(user => {
+      const value = skills.users[user][skill];
+      skillUsers[user] = value;
+    });
+
+    return {
+      id: skill,
+      name: skills.team[skill].name,
+      value: skills.team[skill].value,
+      users: skillUsers
+    };
+  });
+
+  return {dateUpdated, parsedSkills};
+}
+
+function parseTeam(team) {
+  const parsedTeam = {};
+  team.forEach(member => {
+    const id = member.memberId;
+    parsedTeam[id] = {
+      name: member.name,
+      avatar: member.avatar.links.self.href
+    };
+  })
+
+  return parsedTeam;
+}
 
 export default {
   // Name of component for registration
@@ -49,20 +83,9 @@ export default {
   data() {
     return {
       isLoading: true,
-      skills: [
-        {
-          name: "Development"
-        },
-        {
-          name: "Information Technology"
-        },
-        {
-          name: "Operating Systems"
-        },
-        {
-          name: "Networking"
-        }
-      ]
+      dateUpdated: new Date(),
+      skills: [],
+      team: {}
     };
   },
 
@@ -70,13 +93,26 @@ export default {
   async created() {
     let skills = await this.skillsClient.getTeamSkillReport();
     let team = await this.teamIdentityClient.getTeamMembers();
-    // eslint-disable-next-line
-    console.log(skills, team);
+
+    const {dateUpdated, parsedSkills} = parseSkills(skills, team);
+    const parsedTeam = parseTeam(team);
+    this.dateUpdated = dateUpdated;
+    this.skills = parsedSkills;
+    this.team = parsedTeam;
     this.isLoading = false;
   },
 
   // Reactive properties which will update when the properties used inside these also update
   computed: {
+    formattedDate() {
+      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dev'];
+
+      const day = this.dateUpdated.getDate();
+      const month = months[this.dateUpdated.getMonth()];
+      const year = this.dateUpdated.getFullYear();
+
+      return `${month} ${day}, ${year}`;
+    }
   },
 
   // Defines a list of methods which can be called

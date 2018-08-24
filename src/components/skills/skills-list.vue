@@ -6,8 +6,9 @@
         {{ skill.name }}
       </b-list-group-item>
       <b-collapse :id="`skill${index}-accordion`" :accordion="`${header}-accordion`" role="tabpanel" :key="`skill${index}-content`">
-        <b-list-group-item>Something inside</b-list-group-item>
-        <b-list-group-item>Something inside</b-list-group-item>
+        <b-list-group-item v-for="(value, user) in skill.users" :key="`skill${index}-${user}`">
+          {{ team[user].name }}
+        </b-list-group-item>
       </b-collapse>
     </template>
   </b-list-group>
@@ -25,6 +26,10 @@ export default {
     skills: {
       type: Array,
       required: true
+    },
+    team: {
+      type: Object,
+      required: true
     }
   }
 }
@@ -37,7 +42,6 @@ export default {
 }
 
 .skill-list > .list-group-item {
-
   &:not(:first-child) {
     cursor: pointer;
   }
