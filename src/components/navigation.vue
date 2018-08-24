@@ -16,7 +16,7 @@
         </b-navbar-nav>
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
-          <b-nav-text class="text-30 text-right text-primary mx-3 m-xs-0 pointer">{{ currentTeamName }}</b-nav-text>
+          <b-nav-text class="text-30 text-primary mr-3 pointer">{{ currentTeamName }}</b-nav-text>
           <b-nav-item-dropdown v-if="profile.userId" extra-menu-classes="nav-dropdown-xs" extra-toggle-classes="pl-0" right no-caret>
             <template slot="button-content">
               <span v-if="profile.userId" class="d-inline-block d-sm-none">{{ profile.name }}</span>
