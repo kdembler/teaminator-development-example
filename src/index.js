@@ -1,7 +1,6 @@
 import 'error-object-polyfill';
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import { VuePlugin } from 'vuera';
 
 import App from './app.vue';
 import AlertHandler from './errorHandling/alertHandler';
@@ -18,7 +17,6 @@ import './style.scss';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 
 Vue.use(VueRouter);
-Vue.use(VuePlugin);
 Vue.use(BootstrapVue);
 
 async function init() {
