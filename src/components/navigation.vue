@@ -11,8 +11,8 @@
 
       <b-collapse is-nav id="nav_collapse" v-model="showCollapse">
         <b-navbar-nav v-if="profile.userId" class="text-30">
-          <b-nav-item :to="{ name: 'Home' }" active-class="navlink-active" class="text-right" exact><span>Home</span></b-nav-item>
-          <b-nav-item :to="{ name: 'Skills' }" active-class="navlink-active" class="text-right"><span>Skills</span></b-nav-item>
+          <b-nav-item :to="{ name: 'Home' }" active-class="navlink-active" class="text-left" exact><span>Home</span></b-nav-item>
+          <b-nav-item :to="{ name: 'Skills' }" active-class="navlink-active" class="text-left"><span>Skills</span></b-nav-item>
         </b-navbar-nav>
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">

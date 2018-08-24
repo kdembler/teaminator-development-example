@@ -13,7 +13,7 @@
       <b-col class="p-0 pr-md-3" cols="12" md="6">
         <skills-list header="By Skill" :skills="skills" :team="team"/>
       </b-col>
-      <b-col class="p-0 pl-md-3" cols="12" md="6">
+      <b-col class="p-0 pl-md-3 mt-4 mt-md-0" cols="12" md="6">
         <skills-list header="By Skill" :skills="skills" :team="team" id="1"/>
       </b-col>
     </b-row>

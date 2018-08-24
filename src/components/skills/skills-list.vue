@@ -86,6 +86,7 @@ $divider-color: #e9eff2;
   bottom: 0;
   height: 1px;
   width: 94%;
+  transition: border-bottom 0.25s linear;
   border-bottom: 1px solid $divider-color;
 }
 
@@ -94,11 +95,7 @@ $divider-color: #e9eff2;
   margin: 0;
   background-color: #fafcfc;
 
-  &:first-child {
-    border-radius: 0;
-  }
-
-  &:last-child {
+  &:first-child, :last-child {
     border-radius: 0;
   }
 }
@@ -116,8 +113,13 @@ $divider-color: #e9eff2;
     border-bottom: 1px solid $divider-color;
   }
 
-  &:not(:first-child):not(:nth-last-child(2)):not(.skill-expanded)::after {
+  &:not(:first-child):not(:nth-last-child(2))::after {
     @extend %divider;
+  }
+
+  &:not(:first-child):not(:nth-last-child(2)).skill-expanded::after {
+    @extend %divider;
+    border-bottom: 1px solid #2d434d;
   }
 }
 

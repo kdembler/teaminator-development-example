@@ -1,8 +1,9 @@
 {
   "name": "teaminator",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "scripts": {
-    "start": "vue-cli-service serve"
+    "start": "vue-cli-service serve",
+    "build": "vue-cli-service build"
   },
   "dependencies": {
     "ajv": ">5.0.0",
