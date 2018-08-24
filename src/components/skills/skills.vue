@@ -24,7 +24,7 @@
 <script>
 import SkillsList from './skills-list';
 
-function parseSkills(skills, team) {
+function parseSkills(skills) {
   const dateUpdated = new Date(skills.lastUpdated);
 
   const parsedSkills = Object.keys(skills.team).map(skill => {
@@ -45,7 +45,7 @@ function parseSkills(skills, team) {
     };
   });
 
-  return {dateUpdated, parsedSkills};
+  return { dateUpdated, parsedSkills };
 }
 
 function parseTeam(team) {
@@ -56,7 +56,7 @@ function parseTeam(team) {
       name: member.name,
       avatar: member.avatar.links.self.href
     };
-  })
+  });
 
   return parsedTeam;
 }
@@ -83,7 +83,7 @@ export default {
     let skills = await this.skillsClient.getTeamSkillReport();
     let team = await this.teamIdentityClient.getTeamMembers();
 
-    const {dateUpdated, parsedSkills} = parseSkills(skills, team);
+    const { dateUpdated, parsedSkills } = parseSkills(skills, team);
     const parsedTeam = parseTeam(team);
     this.dateUpdated = dateUpdated;
     this.skills = parsedSkills;
