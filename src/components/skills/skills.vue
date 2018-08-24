@@ -1,5 +1,5 @@
 <template>
-<b-container class="p-0 text-dark">
+<b-container class="p-4 text-dark">
   <loader v-show="isLoading"></loader>
   <div v-if="!isLoading" class="d-panel">
     <b-row>
@@ -10,8 +10,11 @@
       <small>Updated on <b class="text-dark">{{ formattedDate }}</b></small>
     </b-row>
     <b-row class="mt-3">
-      <b-col class="p-0 pr-2" cols="6">
+      <b-col class="p-0 pr-md-3" cols="12" md="6">
         <skills-list header="By Skill" :skills="skills" :team="team"/>
+      </b-col>
+      <b-col class="p-0 pl-md-3" cols="12" md="6">
+        <skills-list header="By Skill" :skills="skills" :team="team" id="1"/>
       </b-col>
     </b-row>
   </div>

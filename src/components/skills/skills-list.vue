@@ -1,10 +1,10 @@
 <template>
   <b-list-group class="skill-list">
-    <b-list-group-item>{{ header }}</b-list-group-item>
+    <b-list-group-item>By Skill</b-list-group-item>
     <template v-for="skill in skills">
       <b-list-group-item
         v-bind:class="{'bg-dark': opened[skill.id], 'text-white': opened[skill.id], 'skill-expanded': opened[skill.id]}"
-        v-b-toggle="`${skill.id}-accordion`"
+        v-b-toggle="`${skill.id}-accordion-${id}`"
         :key="`${skill.id}-header`"
       >
         <b-row align-h="between">
@@ -18,8 +18,8 @@
       </b-list-group-item>
       <b-collapse
         v-model="opened[skill.id]"
-        :id="`${skill.id}-accordion`"
-        :accordion="`${header}-accordion`"
+        :id="`${skill.id}-accordion-${id}`"
+        :accordion="`skill-list-accordion-${id}`"
         class="users-list"
         role="tabpanel"
         :key="`${skill.id}-users`"
@@ -53,11 +53,6 @@ export default {
   },
 
   props: {
-    header: {
-      type: String,
-      required: false,
-      default() { return 'Skills'; }
-    },
     skills: {
       type: Array,
       required: true
@@ -65,6 +60,11 @@ export default {
     team: {
       type: Object,
       required: true
+    },
+    id: {
+      type: String,
+      required: false,
+      default: '0'
     }
   },
 
