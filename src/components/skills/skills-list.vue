@@ -92,12 +92,9 @@ $divider-color: #e9eff2;
 
 .list-group-item {
   border: none;
+  border-radius: 0;
   margin: 0;
   background-color: #fafcfc;
-
-  &:first-child, :last-child {
-    border-radius: 0;
-  }
 }
 
 .skill-list > .list-group-item {
@@ -129,8 +126,8 @@ $divider-color: #e9eff2;
 
   &:not(:last-child)::after {
     @extend %divider;
-    left: 4%;
-    width: 92%;
+    left: 5%;
+    width: 90%;
   }
 
   &:last-child {
