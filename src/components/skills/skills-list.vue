@@ -7,7 +7,14 @@
         v-b-toggle="`${skill.id}-accordion`"
         :key="`${skill.id}-header`"
       >
-        {{ skill.name }}
+        <b-row align-h="between">
+          <b-col cols="10">
+            {{ skill.name }}
+          </b-col>
+          <b-col cols="2">
+            <colored-progress-circle class="float-right" :value="skill.value" size="small" />
+          </b-col>
+        </b-row>
       </b-list-group-item>
       <b-collapse
         v-model="opened[skill.id]"
@@ -18,7 +25,14 @@
         :key="`${skill.id}-users`"
       >
         <b-list-group-item v-for="(value, user) in skill.users" :key="`${skill.id}-${user}`">
-          {{ team[user].name }}
+          <b-row align-h="between">
+            <b-col cols="10">
+              {{ team[user].name }}
+            </b-col>
+            <b-col cols="2">
+              <colored-progress-circle class="float-right" :value="value" size="small"  />
+            </b-col>
+         </b-row>
         </b-list-group-item>
       </b-collapse>
     </template>
@@ -26,8 +40,13 @@
 </template>
 
 <script>
+import ColoredProgressCircle from '../progress/coloredProgressCircle';
+
 export default {
   name: 'SkillsList',
+  components: {
+    ColoredProgressCircle
+  },
   props: {
     header: {
       type: String,
@@ -102,6 +121,8 @@ $divider-color: #e9eff2;
 
   &:not(:last-child)::after {
     @extend %divider;
+    left: 4%;
+    width: 92%;
   }
 
   &:last-child {

@@ -28,9 +28,12 @@ function parseSkills(skills, team) {
 
   const parsedSkills = Object.keys(skills.team).map(skill => {
     const skillUsers = {};
-    Object.keys(skills.users).map(user => {
+    Object.keys(skills.users).forEach(user => {
       const value = skills.users[user][skill];
-      skillUsers[user] = value;
+      if (!value) {
+        return;
+      }
+      skillUsers[user] = value.value;
     });
 
     return {

@@ -1,11 +1,11 @@
 <template>
-  <div :style="`width: ${(size === 'big') ? 100 : 60}px;`">
+  <div :style="`width: ${(size === 'big') ? 100 : 40}px;`">
     <progress-bar ref="circle" type="circle" :options="properties"></progress-bar>
     <div ref="text">
       <div :style="{'line-height': (size === 'big') ? '20px' : '4px', 'text-align': 'center', 'color': color }">
-        <i class="fa fa-sort-asc" :class="{ 'fa-lg': (size === 'big') }" :style="{'color': getChangeColor(true) }" aria-hidden="true"></i><br/>
+        <!-- <i class="fa fa-sort-asc" :class="{ 'fa-lg': (size === 'big') }" :style="{'color': getChangeColor(true) }" aria-hidden="true"></i><br/> -->
         <b :style="{'font-size': (size === 'big') ? '28px' : '16px' }">{{ Math.floor(score * 100) }}</b><br/>
-        <i class="fa fa-sort-desc" :class="{ 'fa-lg': (size === 'big') }" :style="{ 'color': getChangeColor(false) }" aria-hidden="true"></i>
+        <!-- <i class="fa fa-sort-desc" :class="{ 'fa-lg': (size === 'big') }" :style="{ 'color': getChangeColor(false) }" aria-hidden="true"></i> -->
       </div>
     </div>
   </div>
