@@ -3,13 +3,13 @@
     <b-list-group-item>By Skill</b-list-group-item>
     <template v-for="skill in skills">
       <b-list-group-item
-        v-bind:class="{'bg-dark': opened[skill.id], 'text-white': opened[skill.id], 'skill-expanded': opened[skill.id]}"
+        v-bind:class="opened[skill.id] ? ['bg-dark', 'text-white', 'skill-expanded'] : ''"
         v-b-toggle="`${skill.id}-accordion-${id}`"
         :key="`${skill.id}-header`"
       >
         <b-row align-h="between">
           <b-col cols="10">
-            {{ skill.name }}
+            <div class="mt-2"><span>{{ skill.name }}</span></div>
           </b-col>
           <b-col cols="2">
             <colored-progress-circle class="float-right" :value="skill.value" size="small" />
@@ -28,7 +28,7 @@
           <b-row align-h="between">
             <b-col cols="10">
               <avatar :userId="user" :url="team[user].avatar" size="40" class="mr-2" />
-              {{ team[user].name }}
+              <span class="ml-1">{{ team[user].name }}</span>
             </b-col>
             <b-col cols="2">
               <colored-progress-circle class="float-right" :value="value" size="small"  />
